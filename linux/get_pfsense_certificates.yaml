@@ -6,18 +6,18 @@
 
   vars:
     ansible_python_interpreter: /usr/local/bin/python3.8
-# alternatively, set as a variable in your inventory
-- name: set domain_name
-  set_fact: 
-    domain_name: mydomain.org
-  
-- name: get certs
-  fetch:
-    src: "/conf/acme/{{ item }}"
-    dest: ../.certs/ 
-    flat: yes
-  with_items:
-  - "{{ domain_name }}.fullchain" 
-  - "{{ domain_name }}.ca"
-  - "{{ domain_name }}.key"
-  - "{{ domain_name }}.crt"
+    # alternatively, set as a variable in your inventory
+    - name: set domain_name
+      set_fact: 
+        domain_name: bgnas5.martinlaan.be
+  tasks:
+    - name: get certs
+      fetch:
+        src: "/conf/acme/{{ item }}"
+        dest: /certs/.certs/ 
+        flat: yes
+      with_items:
+      - "{{ domain_name }}.fullchain" 
+      - "{{ domain_name }}.ca"
+      - "{{ domain_name }}.key"
+      - "{{ domain_name }}.crt"
