@@ -7,7 +7,6 @@
   vars:
     ansible_python_interpreter: /usr/local/bin/python3.8
   tasks:
-    # alternatively, set as a variable in your inventory
     - name: set domain_name
       set_fact: 
         domain_name: bgnas5.martinlaan.be
