@@ -1,0 +1,15 @@
+---
+- hosts: all
+  gather_facts: false
+  become: true
+  become_user: root
+
+  vars:
+    ansible_python_interpreter: /usr/local/bin/python3.8
+  tasks:
+    - name: Add adservers alias
+      pfsensible.core.pfsense_alias:
+          name: adservers
+          address: 10.0.0.1 10.0.0.2
+          state: present
+          type: host
