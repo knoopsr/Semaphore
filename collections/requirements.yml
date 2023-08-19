@@ -1,1 +1,8 @@
-pfsensible.core
+---
+
+collections:
+  - 'pfsensible.core'
+  - 'community.general'
+  - 'ansible.posix'
+  - 'community.mysql'
+  - 'community.crypto'
