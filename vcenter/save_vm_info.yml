@@ -1,0 +1,21 @@
+---
+- name: Save VM info to file
+  hosts: localhost
+  gather_facts: false
+
+  tasks:
+    - name: Set VM-specific data
+      set_fact:
+        vm_ip: "{{ vm.guest.ip_address }}"
+        esxi_host: "{{ vm.summary.runtime.host.name }}"
+        guest_fullname: "{{ vm.guest.guest_fullname }}"
+      vars:
+        vm: "{{ vm.item }}"
+
+    - name: Create file with VM info
+      copy:
+        content: |
+          IP Address: {{ vm_ip }}
+          ESXi Hostname: {{ esxi_host }}
+          Guest Fullname: {{ guest_fullname }}
+        dest: "/home/semaphore/files/vm_info/{{ vm.name }}.txt"
