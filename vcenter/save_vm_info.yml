@@ -17,9 +17,7 @@
       file:
         path: "/home/semaphore/files/vm_info/{{ item.name }}.txt"
         state: touch
-      loop: "{{ vm_info.virtual_machines }}"
-      loop_control:
-        loop_var: item
+      loop: "{{ vm_info }}"
 
     - name: Populate files with VM info
       lineinfile:
@@ -28,6 +26,4 @@
           ESXi Hostname: {{ item.summary.runtime.host.name }}
           Guest Fullname: {{ item.guest.guest_fullname }}
         path: "/home/semaphore/files/vm_info/{{ item.name }}.txt"
-      loop: "{{ vm_info.virtual_machines }}"
-      loop_control:
-        loop_var: item
+      loop: "{{ vm_info }}"
