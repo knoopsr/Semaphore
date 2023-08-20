@@ -1,21 +1,33 @@
 ---
-- name: Save VM info to file
+- name: Create individual files for VM info
   hosts: localhost
   gather_facts: false
 
   tasks:
-    - name: Set VM-specific data
-      set_fact:
-        vm_ip: "{{ vm.guest.ip_address }}"
-        esxi_host: "{{ vm.summary.runtime.host.name }}"
-        guest_fullname: "{{ vm.guest.guest_fullname }}"
-      vars:
-        vm: "{{ vm.item }}"
+    - name: Read JSON file
+      slurp:
+        src: /home/semaphore/files/vcenter/list.json
+      register: json_file_content
 
-    - name: Create file with VM info
-      copy:
-        content: |
-          IP Address: {{ vm_ip }}
-          ESXi Hostname: {{ esxi_host }}
-          Guest Fullname: {{ guest_fullname }}
-        dest: "/home/semaphore/files/vm_info/{{ vm.name }}.txt"
+    - name: Parse JSON content
+      set_fact:
+        vm_info: "{{ json_file_content.content | b64decode | from_json }}"
+
+    - name: Create files for VM info
+      file:
+        path: "/home/semaphore/files/vm_info/{{ item.name }}.txt"
+        state: touch
+      loop: "{{ vm_info.virtual_machines }}"
+      loop_control:
+        loop_var: item
+
+    - name: Populate files with VM info
+      lineinfile:
+        line: |
+          IP Address: {{ item.guest.ip_address }}
+          ESXi Hostname: {{ item.summary.runtime.host.name }}
+          Guest Fullname: {{ item.guest.guest_fullname }}
+        path: "/home/semaphore/files/vm_info/{{ item.name }}.txt"
+      loop: "{{ vm_info.virtual_machines }}"
+      loop_control:
+        loop_var: item
