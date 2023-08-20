@@ -14,7 +14,7 @@
     - name: get certs
       fetch:
         src: "/conf/acme/{{ item }}"
-        dest: /certs/.certs/ 
+        dest: /home/semaphore/certs/ 
         flat: yes
       with_items:
       - "{{ domain_name }}.fullchain" 
