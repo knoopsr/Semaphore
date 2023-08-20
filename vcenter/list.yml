@@ -13,7 +13,8 @@
       delegate_to: localhost
       register: vminfo
 
-    - name: Write vminfo to a YAML file
+    - name: Write vminfo to a JSON file
       copy:
-        content: "{{ vminfo | to_yaml }}"
-        dest: /home/semaphore/files/vcenter/list.yml
+        content: "{{ vminfo | to_nice_json }}"
+        dest: /home/semaphore/files/vcenter/list.json
+
