@@ -20,14 +20,18 @@
       loop: "{{ vm_info.virtual_machines }}"
       loop_control:
         loop_var: item
-
+    - name: Verwijder alle bestanden in de opgegeven map
+      file:
+        path: /home/semaphore/bucket/Vcenter/Vms
+        state: absent
+        recurse: yes
     - name: Populate files with VM info
       lineinfile:
         line: |
           IP Address: {{ item.ip_address }}
           ESXi Hostname: {{ item.esxi_hostname }}
           Guest Fullname: {{ item.guest_fullname }}
-        path: "/home/semaphore/files/vm_info/{{ item.guest_name }}.txt"
+        path: "/home/semaphore/bucket/Vcenter/Vms{{ item.guest_name }}.md"
       loop: "{{ vm_info.virtual_machines }}"
       loop_control:
         loop_var: item
