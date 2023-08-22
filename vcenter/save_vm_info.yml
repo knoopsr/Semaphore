@@ -15,7 +15,6 @@
     - name: Verwijder alle bestanden in de opgegeven map
       file:
         path: /home/semaphore/bucket/Vcenter/Vms
-        state: absent
         recurse: yes
     - name: Create files for VM info
       file:
