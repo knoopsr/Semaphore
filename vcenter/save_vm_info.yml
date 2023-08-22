@@ -17,7 +17,6 @@
         path: /home/semaphore/bucket/Vcenter/Vms
         state: absent
         recurse: yes
-        file_type: directory
     - name: Create files for VM info
       file:
         path: "/home/semaphore/bucket/Vcenter/Vms/{{ item.guest_name }}.md"
