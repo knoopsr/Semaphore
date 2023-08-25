@@ -3,6 +3,9 @@
   gather_facts: false
 
   tasks:
+    - name: set domain_name
+      set_fact: 
+        domain_name: Wildcard.martinlaan.be
 
     - name: set directories
       set_fact:
@@ -18,8 +21,8 @@
     # certs from previous task
     - name: stage certs
       copy:
-        src: "../.certs/{{ item.s }}"
-        dest: "/tmp/certs/{{ item.d }}"
+        src: "/certs/Wildcard.martinlaan.be"
+        dest: "/tmp/certs/Wildcard.martinlaan.be"
       with_items:
         - { s: "{{ domain_name }}.crt",
             d: "cert.pem" }
