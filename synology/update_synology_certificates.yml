@@ -75,3 +75,25 @@
       when: not item.1.isPkg
       become: true
       become_user: root
+
+    - name: restart affected services
+      shell:
+        cmd: "/usr/syno/sbin/synoservicectl --reload {{ item }}"
+      with_items:
+        # different per server - no doubt you will need to add or 
+        # remove services from this list
+        - nginx                   # DSM
+        #- pkgctl-MailServer
+        #- pkgctl-SynologyDrive
+        #- ftpd
+        #- pkgctl-ReplicationService
+      when: certs.changed
+      become: true
+      become_user: root
+
+    - name: remove cert staging directory
+      file:
+        path: "{{ stg_dir }}"
+        state: absent
+      become: true
+      become_user: root
