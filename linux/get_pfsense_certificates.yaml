@@ -9,7 +9,7 @@
   tasks:
     - name: set domain_name
       set_fact: 
-        domain_name: Wildcard.martinlaan.be
+        domain_name: bgnas3.martinlaan.be
 
     - name: get certs
       fetch:
