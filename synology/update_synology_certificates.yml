@@ -24,7 +24,7 @@
     # certs from previous task
     - name: stage certs
       copy:
-        src: "/home/semaphore/certs/Wildcard.martinlaan.be"
+        src: "/home/semaphore/certs/bgnas3.martinlaan.be"
         dest: "{{ stg_dir }}/"
       with_items:
         - { s: "{{ domain_name }}.crt",
