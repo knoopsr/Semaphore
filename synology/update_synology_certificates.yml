@@ -25,7 +25,7 @@
     - name: stage certs
       copy:
         src: "/home/semaphore/certs/Wildcard.martinlaan.be"
-        dest: "/tmp/certs/Wildcard.martinlaan.be"
+        dest: "{{ stg_dir }}/"
       with_items:
         - { s: "{{ domain_name }}.crt",
             d: "cert.pem" }
@@ -50,8 +50,6 @@
         remote_src: true
       with_items: "{{ cert_info | flatten }}"
       register: certs
-      become: true
-      become_user: root
 
     - name: copy certs for packaged services
       copy:
