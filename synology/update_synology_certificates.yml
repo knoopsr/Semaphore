@@ -52,6 +52,8 @@
         remote_src: true
       with_items: "{{ cert_info | flatten }}"
       register: certs
+      become: true
+      become_user: root
 
 
     - name: copy certs for packaged services
@@ -61,6 +63,8 @@
         remote_src: true
       loop: "{{ cert_info | subelements('value.services') }}"
       when: item.1.isPkg
+      become: true
+      become_user: root
 
     - name: copy certs for system services
       copy:
@@ -69,3 +73,5 @@
         remote_src: true
       loop: "{{ cert_info | subelements('value.services') }}"
       when: not item.1.isPkg
+      become: true
+      become_user: root
