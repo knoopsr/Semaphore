@@ -1,0 +1,6 @@
+- hosts: all
+  tasks:
+  - include_role:
+      name: synology_certs
+    vars:
+      cert_dir: '~/sources/acme.sh/certs/'
