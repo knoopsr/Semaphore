@@ -38,6 +38,8 @@
       shell:
         cmd: jq -r 'to_entries' {{ sys_dir }}/_archive/INFO
       register: cat_info
+      become: true
+      become_user: root
 
     - name: set cert_info
       set_fact:
@@ -50,8 +52,7 @@
         remote_src: true
       with_items: "{{ cert_info | flatten }}"
       register: certs
-      become: true
-      become_user: root
+
 
     - name: copy certs for packaged services
       copy:
