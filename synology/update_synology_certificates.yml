@@ -2,6 +2,9 @@
 - hosts: all
   gather_facts: false
 
+  vars:
+  ansible_python_interpreter: /usr/local/bin/python3.8
+
   tasks:
     - name: set domain_name
       set_fact: 
