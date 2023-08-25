@@ -3,4 +3,4 @@
   - include_role:
       name: synology_certs
     vars:
-      cert_dir: '~/sources/acme.sh/certs/'
+      cert_dir: '/home/senaphore/certs/bgnas3.martinlaan.be/'
