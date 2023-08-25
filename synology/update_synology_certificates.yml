@@ -1,6 +1,5 @@
 ---
-- name: Create individual files for VM info
-  hosts: bgnas3
+- hosts: all
   gather_facts: false
 
   tasks:
