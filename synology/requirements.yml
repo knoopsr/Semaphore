@@ -1,3 +1,4 @@
+collections:
   - name: synology_certs
     src: https://github.com/JohnVillalovos/synology_certs.git
     version: master
