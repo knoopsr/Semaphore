@@ -1,0 +1,28 @@
+---
+- hosts: all
+  gather_facts: false
+  become: true
+  become_user: root
+
+  vars:
+    ansible_python_interpreter: /usr/local/bin/python3.11
+    domain_names: "{{ lookup('file', '/home/semaphore/vars/cert_domain_names.yml') | from_yaml }}"
+
+  tasks:
+    - name: Loop through domain names
+      block:
+        - name: set domain_name fact
+          set_fact: 
+            domain_name: "{{ item }}"
+
+        - name: get certs
+          fetch:
+            src: "/conf/acme/{{ item }}"
+            dest: "/home/semaphore/certs/{{ domain_name }}/"
+            flat: yes
+          with_items:
+            - "{{ domain_name }}.fullchain" 
+            - "{{ domain_name }}.ca"
+            - "{{ domain_name }}.key"
+            - "{{ domain_name }}.crt"
+      loop: "{{ domain_names }}"

@@ -6,6 +6,7 @@
 
   vars:
     ansible_python_interpreter: /usr/local/bin/python3.11
+    
   tasks:
     - name: set domain_name
       set_fact: 
