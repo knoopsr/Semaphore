@@ -11,4 +11,4 @@
   tasks:
     - name: Loop fetch_certs.yml
       include_tasks: fetch_certs.yml
-      loop: "{{ domain_names }}""
+      loop: "{{ domain_names }}"
