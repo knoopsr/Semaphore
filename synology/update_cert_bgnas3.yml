@@ -8,7 +8,7 @@
   tasks:
     - name: set domain_name
       set_fact: 
-        domain_name: bgnas4.martinlaan.be
+        domain_name: bgnas3.martinlaan.be
 
     - name: set directories
       set_fact:
