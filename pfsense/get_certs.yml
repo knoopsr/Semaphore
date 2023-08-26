@@ -11,6 +11,6 @@
   tasks:
     - name: Loop through domain names
       include_tasks: fetch_certs.yml
-      loop: "{{ domain_names }}"
+      loop: "{{ domain_names(wantlist=True) }}"
       loop_control:
         loop_var: domain_name
