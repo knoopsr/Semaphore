@@ -3,7 +3,7 @@
   gather_facts: false
 
   vars:
-    ansible_python_interpreter: /usr/local/bin/python3.8
+    ansible_python_interpreter: /usr/local/bin/python2.7
 
   tasks:
     - name: set domain_name
@@ -78,7 +78,7 @@
 
     - name: restart affected services
       shell:
-        cmd: "/usr/syno/bin/synosystemctl restart {{ item }}"
+        cmd: "/usr/syno/sbin/synoservicectl --reload {{ item }}"
       with_items:
         # different per server - no doubt you will need to add or 
         # remove services from this list
