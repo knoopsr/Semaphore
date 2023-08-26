@@ -2,10 +2,10 @@
 - name: get certs
   fetch:
     src: "/conf/acme/{{ domain_name  }}"
-    dest: "/home/semaphore/certs/{{ item }}/"
+    dest: "/home/semaphore/certs/{{ domain_name }}/"
     flat: yes
   with_items:
-    - "{{ item }}.fullchain" 
-    - "{{ item }}.ca"
-    - "{{ item }}.key"
-    - "{{ item }}.crt"
+    - "{{ domain_name }}.fullchain" 
+    - "{{ domain_name }}.ca"
+    - "{{ domain_name }}.key"
+    - "{{ domain_name }}.crt"
