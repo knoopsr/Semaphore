@@ -6,7 +6,7 @@
 
   vars:
     ansible_python_interpreter: /usr/local/bin/python3.11
-    domain_names: "{{ lookup('file', '/home/semaphore/vars/cert_domain_names.yml') }}"
+    domain_names: "{{ lookup('file', '/home/semaphore/vars/cert_domain_names.yml').splitlines() }}"
 
   tasks:
     - name: Loop through domain names
