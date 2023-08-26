@@ -6,9 +6,11 @@
 
   vars:
     ansible_python_interpreter: /usr/local/bin/python3.11
-    domain_names: "{{ lookup('file', '/home/semaphore/vars/cert_domain_names.yml') | from_yaml }}"
+    domain_names: "{{ lookup('file', '/home/semaphore/vars/cert_domain_names.yml') | from_yaml }}['domain_names']"
 
   tasks:
-    - name: Loop fetch_certs.yml
+    - name: Loop through domain names
       include_tasks: fetch_certs.yml
       loop: "{{ domain_names }}"
+      loop_control:
+        loop_var: domain_name
