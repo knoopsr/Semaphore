@@ -1,0 +1,11 @@
+---
+- name: get certs
+  fetch:
+    src: "/conf/acme/{{ item }}"
+    dest: "/home/semaphore/certs/{{ item }}/"
+    flat: yes
+  with_items:
+    - "{{ item }}.fullchain" 
+    - "{{ item }}.ca"
+    - "{{ item }}.key"
+    - "{{ item }}.crt"
