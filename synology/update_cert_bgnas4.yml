@@ -78,7 +78,7 @@
 
     - name: restart affected services
       shell:
-        cmd: "/usr/syno/bin/synosystemctl restart {{ item }}"
+        cmd: "/usr/syno/sbin/synoservicectl --reload {{ item }}"
       with_items:
         # different per server - no doubt you will need to add or 
         # remove services from this list
