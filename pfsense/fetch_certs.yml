@@ -1,7 +1,7 @@
 ---
 - name: get certs
   fetch:
-    src: "/conf/acme/{{ items }}"
+    src: "/conf/acme/{{ item }}"
     dest: "/home/semaphore/certs/{{ domain_name }}/"
     flat: yes
   with_items:
