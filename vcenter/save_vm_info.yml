@@ -4,6 +4,16 @@
   gather_facts: false
 
   tasks:
+
+    - name: Verwijder alle bestanden in de opgegeven map
+      file:
+        path: /home/semaphore/bucket/Vcenter/Vms
+        recurse: yes
+
+    - name: Pause for 1 minutes to delete files
+      ansible.builtin.pause:
+        minutes: 1 
+
     - name: Read JSON file
       slurp:
         src: /home/semaphore/files/vcenter/list.json
@@ -12,10 +22,7 @@
     - name: Parse JSON content
       set_fact:
         vm_info: "{{ json_file_content.content | b64decode | from_json }}"
-    - name: Verwijder alle bestanden in de opgegeven map
-      file:
-        path: /home/semaphore/bucket/Vcenter/Vms
-        recurse: yes
+  
     - name: Create files for VM info
       file:
         path: "/home/semaphore/bucket/Vcenter/Vms/{{ item.guest_name }}.md"
