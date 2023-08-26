@@ -4,11 +4,10 @@
   gather_facts: false
 
   tasks:
-
-    - name: Verwijder alle bestanden in de opgegeven map
-      file:
+    - name: Delete content & directory
+      ansible.builtin.file:
+        state: absent
         path: /home/semaphore/bucket/Vcenter/Vms
-        recurse: yes
 
     - name: Pause for 1 minutes to delete files
       ansible.builtin.pause:
